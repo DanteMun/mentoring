@@ -1,0 +1,43 @@
+{% extends 'mentoring_page/base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'login.css' %}" />
+        <style>
+    .text-align-center {
+        text-align:center;
+    }
+    body {
+        padding-top: 80px;
+    }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+
+        <br/>
+        <p class="lead text-align-center"><strong>로그인</strong></p>
+        <form method="post" action="">{% csrf_token %}
+            {% bootstrap_form form %}
+        <hr />
+            {% buttons %}
+                <button type="submit" class="btn btn-primary" style="width:49%">{% bootstrap_icon "ok-sign" %} 로그인 </button>
+                <a style="width:49%" class="btn btn-warning" href="{% url 'accounts:signup_choice' %}">회원가입</a>
+            {% endbuttons %}
+
+        </form>
+        <hr />
+        <p style="text-align: center; color: #555;">로그인 후 이용이 가능합니다.<br/>
+계정이 없으시다면 회원가입 후 이용해주세요.</p>
+    </div>
+    </div>
+</div>
+
+
+{% endblock %}

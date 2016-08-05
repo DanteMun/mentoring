@@ -1,0 +1,66 @@
+{% extends 'mentoring_page/base.html' %}
+{% load staticfiles %}
+
+
+{% block style %}
+
+<style>
+    .main_container {
+        position: relative;
+        overflow: hidden;
+    }
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="main_container" >
+    <div class="jumbotron"style=" text-align:center;margin : 0 0 0 0;padding:30px 0 30px 0; ;width: 100%;position : relative;z-index: 12;margin-top: 0% ;background-color: white; ">
+
+    <div style="z-index: 12;position: relative;background-color: white;" ><img src='{% static 'img/sherpa.png' %}' style="margin: 0 25% 0 25%; height:300px;width: 50% ;opacity : 0.4;"></div>
+        <!-- Page Features -->
+        <div class="row text-center">
+            <div style="width:100%; margin : 0 0 0 0;">
+
+
+                <!-- Jumbotron Header -->
+                <div class="jumbotron" style=" margin : 0 0 0 0; width: 100%;border-radius:50px;padding : 0% 0 0.2% 0;position : relative;z-index: 12;margin-top: 30px; ;background-color: rgba( 255, 255, 255, 0.6 ); ">
+                    <h3 style="width: 100%">당신을 위한 멘토링</h3>
+                    <p>환영합니다 :)</p>
+                    </p>
+                </div>
+            </div>
+         <div style="position: relative; z-index: 12; padding: 2% 0 0 0 ">
+            <div style="display:inline-block; width:20%; height:10%;">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <a href = "{% url 'accounts:mentor_signup' %}" style="text-decoration: none;"><h3><b>멘토</b><small>로 가입하기</small></h3></a>
+                    </div>
+                    <a href = "{% url 'accounts:mentor_signup' %}"><img src="{% static 'img/mento_signup.png' %}" alt="" style="position:relative;width:100%;"></a>
+                </div>
+            </div>
+<div style="display:inline-block; width:3%;"></div>
+
+            <div style="display:inline-block; width:20%; height:10%;">
+                <div class="thumbnail">
+                <div class="caption">
+                        <a href = "{% url 'accounts:mentee_signup' %}"style="text-decoration: none;"><h3><b>멘티</b><small>로 가입하기</small></h3></a>
+                    </div>
+                    <a href = "{% url 'accounts:mentee_signup' %}"><img src="{% static 'img/mentee_signup.png' %}" alt="" style="width:100%;"></a>
+
+                </div>
+            </div>
+
+         </div>
+
+        </div>
+        <!-- /.row -->
+
+
+    </div>
+    <!-- /.container -->
+
+{% endblock %}

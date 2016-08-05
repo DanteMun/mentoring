@@ -1,0 +1,102 @@
+{% extends 'mentoring_page/base.html' %}
+
+{% block style %}
+<style>
+
+#left_cell {
+    text-align: center;
+    width: 10%;
+
+}
+
+#right_cell {
+    text-align: left;
+    font-weight: lighter;
+    width: 20%;
+}
+
+#right_cell:hover, #left_cell:hover {
+    background-color: #f5f5f5;
+}
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="table-responsive" style="width: 90%;margin-bottom: 10%;margin-top: 5%;">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th style="width: 7%;background-color:#f5f5f5;text-align: center;border : 2px ridge #cccccc;"><b>개인정보</b></th>
+                            <th id="left_cell"><b>ID</b></th>
+                            <th id="right_cell">{{user.username}}</th>
+
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th id="left_cell"><b>이름</b></th>
+                            <th id="right_cell">{{profile.name}}</th>
+
+                        </tr>
+                        <tr>
+                            <th style="border-top: none;"></th>
+                            <th id="left_cell"><b>비밀번호</b></th>
+                            <th id="right_cell">********</th>
+
+                        </tr>
+                        <tr>
+                            <th style="border-top: none;"></th>
+                            <th id="left_cell"><b>학년</b></th>
+                            <th id="right_cell">{{profile.grade}}</th>
+                        </tr>
+                        <tr>
+                            <th style="border-top: none;"></th>
+                            <th></th>
+                            <th style="width: 2%;border:; padding: 1% 0 1% 5%"><a href="{% url 'profile_edit' %}"><button class="btn-sm btn-warning" style="border:none;float:right;font-weight:bolder;">수정</button></a></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        <div class="table-responsive" style="width: 90%;display: inline-block;">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th style="width: 7%;background-color:#f5f5f5;text-align: center;border : 2px ridge #cccccc;"><b>나의 멘토링</b></th>
+                            <th id="left_cell" style="font-weight: bold;">멘티 이름</th>
+                            <th id="right_cell"style="font-weight: bold;">멘토링 날짜</th>
+
+                        </tr>
+                        {% for mentoring in mentoring_mine %}
+
+                            <tr>
+                                <th></th>
+                                <th id="left_cell"><a href="{% url 'mentoring_detail' mentoring.pk %}" style="text-decoration: none;font-weight: bold;">{{mentoring.name}}</a></th>
+                                <th id="right_cell" style="min-width: 0px;"><a href="{% url 'mentoring_detail' mentoring.pk %}"style="text-decoration: none;font-weight: bold;">{{mentoring.date}}</a>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th style="border-top: none;"></th>
+                                <th style="border-top: none;"></th>
+                                <th style="border-top: none; padding: 0 0 0 0;">
+                                    <a href="{% url 'menteefeedback_new' mentoring.pk %}"><button class="btn-sm btn-primary" style="border:none;float:right;font-weight:bold;margin: 0 0 1% 1%;">후기 작성</button></a>
+                                    <a href="{% url 'mentoring_detail' mentoring.pk %}"><button class="btn-sm btn-primary" style="border:none;float:right;font-weight:bold;margin: 0 0 1% 1%;">멘토링 정보</button></a>
+
+                                </th>
+                            </tr>
+
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}

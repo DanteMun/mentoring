@@ -1,0 +1,82 @@
+{% extends 'mentoring_page/base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+
+
+
+{% block style %}
+    <link href="{% static 'signup.css' %}" rel="stylesheet">
+    <style>
+    .text-align-center {
+        text-align:center;
+    }
+    body {
+        padding-top: 80px;
+    }
+    </style>
+    <style type="text/css">
+    .radio {
+        display: inline-block;
+        border-radius: 3px;
+        margin: 10px 1px;
+        border: 1px solid #aaa;
+    }
+    .radio:hover, .radio:focus, .radio:active {
+        background-color: #aaa;
+    }
+    .radio label {
+        padding:5px;
+    }
+    </style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+    <div class="col-sm-4 col-sm-offset-4"style="margin-top: 3%;margin-bottom: 3%;">
+        <p class="lead text-align-center"><strong>회원 가입</strong></p>
+        <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary pull-right">{% bootstrap_icon "ok-sign" %} 확인 </button>
+            {% endbuttons %}
+        </form>
+    </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+$(document).ready(function(){
+
+    var address = $('#id_address').val();
+    $('#map_search').children('input').val(address);
+
+    $('#map_search').children('input').click(function(){
+        var address = $('#id_address').val();
+        $(this).val(address);
+        alert('검색 버튼을 꼭 눌러서 확인해주세요');
+    });
+
+    $('input:checked').parent().css('background-color', '#aaa');
+
+    function selectedRadioColor(radioInput){
+        $(radioInput).on('change', function() {
+        $(radioInput).parent().css('background-color', 'white');
+        $(this).parent().css('background-color', '#aaa');
+        });
+    };
+
+    selectedRadioColor('#id_major input');
+    selectedRadioColor('#id_admission_type input');
+});
+</script>
+
+
+{% endblock %}
