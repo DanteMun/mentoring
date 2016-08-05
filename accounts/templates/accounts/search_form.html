@@ -1,0 +1,10 @@
+<form id="nav_search" class="navbar-form" method="GET" action="{% url 'accounts:mentor_list' %}" role="search" style="padding-top:20px">
+    <div class="form-group">
+      <input type="text" name="school" class="form-control" placeholder="학교" value="{{ request.GET.school }}" />
+    </div>
+    <div class="form-group">
+      <input type="text" name="major" class="form-control" placeholder="전공" value="{{ request.GET.major }}" />
+    </div>
+    <input href="{% url 'accounts:mentor_list' %}?school={{ query_school }}&major={{ query_major }}" type="submit" class="btn btn-default" value="검색" />
+</form>
+

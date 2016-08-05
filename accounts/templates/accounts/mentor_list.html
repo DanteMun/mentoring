@@ -1,0 +1,42 @@
+{% extends 'mentoring_page/base.html' %}
+
+{% block style %}
+<style>
+
+#left_cell {
+    text-align: center;
+    width: 10%;
+
+}
+
+#right_cell {
+    text-align: left;
+    font-weight: lighter;
+    width: 20%;
+}
+
+#right_cell:hover, #left_cell:hover {
+    background-color: #f5f5f5;
+}
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="table-responsive" style="width: 90%;margin-bottom: 10%;margin-top: 5%;">
+            <div class="col-sm-12">
+                    {% for mentor in mentor_list %}
+                        <div class="col-sm-4 caption">
+                            {{mentor.name}}
+                            <img src="{{mentor.image.url}}"/>
+                        </div>
+                    {% endfor %}
+            </div>
+
+
+    </div>
+</div>
+{% endblock %}

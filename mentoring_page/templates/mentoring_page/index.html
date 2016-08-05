@@ -1,5 +1,9 @@
 {% extends 'mentoring_page/base.html' %}
-
+{% block search %}
+<div id='search' class="col-sm-6 text-center">
+{% include 'accounts/search_form.html' %}
+</div>
+{% endblock %}
 {% block content %}
 <div class="container">
       <div class="jumbotron">

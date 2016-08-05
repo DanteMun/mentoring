@@ -4,6 +4,10 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save, pre_save
 from django.contrib.auth.models import User
 
+from mentoring.utils import thumbnail, random_name_upload_to
+
+
+
 MAJOR_CHOICES = (
     ('간호대학', '간호대학'),
     ('건축학과', '건축학과'),
@@ -96,7 +100,7 @@ class Profile(models.Model):
     frequency = models.IntegerField(default=0)
     rating = models.FloatField(blank=True, default=0)
     highschool = models.CharField(blank=True, max_length=40, verbose_name='출신 고등학교')
-    #image = models.ImageField(blank=True, null=True, upload_to=random_name_upload_to, verbose_name='사진 업로드')
+    image = models.ImageField(blank=True, null=True, upload_to=random_name_upload_to, verbose_name='사진 업로드')
     intro = models.TextField(max_length=300, verbose_name='기타 약력')
 
     #멘티 only

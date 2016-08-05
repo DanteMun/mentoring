@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Q
+
 
 from .models import Profile
 from .forms import MentorForm, MenteeForm, MentorUpdateForm, MenteeUpdateForm
@@ -30,7 +33,7 @@ def mentor_signup(request):
         return render(request, 'accounts/mentor_signup.html', {'form': form,})
     else:
         messages.info(request, "이미 로그인되어있습니다. 로그아웃 이후 실행해주세요.")
-        return redirect('index')
+        return redirect('mentoring:index')
 
 
 #멘티 가입
@@ -52,6 +55,42 @@ def mentee_signup(request):
     else:
         messages.info(request, "이미 로그인되어있습니다. 로그아웃 이후 실행해주세요.")
         return redirect('index')
+
+def mentor_list(request):
+    mentor_list = Profile.objects.filter(is_mentor=True)
+
+    #검색기능
+    query_school = request.GET.get('school')
+    query_major = request.GET.get('major')
+
+    if query_school and query_major:
+        mentor_list = mentor_list.filter(
+            (Q(highschool__contains=query_school)) &
+            (Q(major__contains=query_major))).distinct()
+    elif query_school and not query_major:
+        mentor_list = mentor_list.filter(
+            (Q(highschool__contains=query_school))
+        ).distinct()
+    elif not query_school and query_major:
+        mentor_list = mentor_list.filter(
+            Q(major__contains=query_major)).distinct()
+    else:
+        pass
+
+    #페이지네이터
+    paginator = Paginator(mentor_list, 10)
+    page = request.GET.get('page')
+
+    try:
+        mentors = paginator.page(page)
+    except PageNotAnInteger:
+        mentors = paginator.page(1)
+    except EmptyPage:
+        mentors = paginator.page(paginator.num_pages)
+    return render(request, 'accounts/mentor_list.html', {
+        'mentor_list': mentor_list
+        })
+
 
 
 @login_required
